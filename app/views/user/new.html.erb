@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <%= stylesheet_link_tag 'login_style', media: 'screen' %>
+    <title>Sign-Up</title>
+</head>
+<body>
+  <div class="container" id="container">
+    <%= form_with model: @user, url: sign_up_path do |form| %>
+      <h1>Sign-Up</h1>
+      <div class="social-container">
+        <a href="#">
+          Email
+        </a>
+        <a href="#">
+          Facebook
+        </a>
+        <a href="#">
+          Twitter
+        </a>
+      </div>
+      <%= form.text_field :name, class: "form-control", placeholder: "Name" %><br><br>
+      <%= form.text_field :surname, class: "form-control", placeholder: "Surname" %><br><br>
+      <%= form.text_field :email, class: "form-control", placeholder: "Email" %><br><br>
+      <%= form.password_field :password, class: "form-control", placeholder: "Password" %><br><br>
+      <%= form.submit "Sign Up", class: "login_btn" %>
+    <% end %>
+      <% if @user.errors.any? %>
+  <div id="explicit_error_messages">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved:</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+  </div>
+</body>
+</html>
