@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag 'login_style', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <title>Create Hobby Chat</title>
+</head>
+<body>
+<h1>Create a New Group Chat for a Hobby</h1>
+<div class="container">
+<%= form_with(model: @group_chat, url: group_chats_path, method: :post) do |form| %>
+  <% if @group_chat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group_chat.errors.count, "error") %> prohibited this group chat from being saved:</h2>
+
+      <ul>
+        <% @group_chat.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Give a Name" %>
+  </div>
+
+  <div class="actions" style="margin-top: 10%;">
+    <%= form.button "Create", class: "login_btn" %>
+  </div>
+<% end %>
+    </div>
+<%= link_to "Back", hobby_path, class: "login_btn" %>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%= stylesheet_link_tag 'main_style', media: 'all' %>
+		<title>Hobby Page</title>
+        <script>
+            function showProfilePopup() {
+                var username = '<%= @user_name.present? ? @user_name : 'Guest' %>';
+                var email = '<%= @user_email.present? ? @user_email : '' %>';
+
+                var message = "Username: " + username + "\nEmail: " + email;
+                alert(message);
+            }
+        </script>
+	</head>
+	<body>
+		<header class="header" style="margin-top: -39.5%;">
+			<h2>Hello <%= @user_name.present? ? @user_name : 'Guest' %></h2>
+			<div class="header-buttons">
+				<%= link_to "Log-Out", root_path, method: :delete, class: "logoutbutton", id: "logoutbtn" %>
+			</div>
+		</header>
+		<aside class="left">
+			<ul>
+				<li><%= link_to 'Home', main_path %></li>
+				<li><%= link_to 'Friends', chat_path(current_user) %></li>
+				<li><%= link_to 'Group Chats', group_chatrooms_path %></li>
+				<li><%= link_to 'Hobbies', hobby_path %></li>
+				<li><%= link_to 'Profile', 'javascript:void(0);', onclick: 'showProfilePopup();' %></li>
+
+			</ul>
+		</aside>
+		<main class="main" style="margin-left: -41.75%;">
+<h1>Your Friends</h1>
+<ul>
+  <% @user_chats.each do |chat| %>
+    <li><%= link_to chat.user.name, chat_path(chat) %></li>
+  <% end %>
+</ul>
+		</main>
+	</body>
+</html>

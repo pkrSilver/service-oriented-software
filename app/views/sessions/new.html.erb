@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag 'login_style', media: 'screen' %>
+  <title>Login</title>
+</head>
+<body>
+  <div class="container" id="container">
+    <%= form_for(:session, url: session_path) do |form| %>
+      <h1>Login</h1>
+      <%= form.email_field :email, class: "form-control", placeholder: "Email" %><br><br>
+      <%= form.password_field :password, class: "form-control", placeholder: "Password" %><br><br>
+      <%= form.button "Log In", class: "login_btn" %>
+    <% end %>
+    <% if flash[:alert].present? %>
+    <div id="explicit_error_messages">
+    <h2><%= flash[:alert] %></h2>
+  </div>
+<% end %>
+  </div>
+</body>
+</html>

@@ -1,6 +1,9 @@
 require_relative "boot"
 
 require "rails/all"
+require "sprockets/railtie"
+require "rails/test_unit/railtie"
+require "webpacker"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -15,6 +18,7 @@ module Chatroom
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
+    config.assets.precompile += %w( main_style.css )
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -23,5 +27,7 @@ module Chatroom
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.webpacker.check_yarn_integrity = false
   end
+
 end

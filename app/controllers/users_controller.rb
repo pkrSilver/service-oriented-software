@@ -1,7 +1,8 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
     def new
 
-       @user = User.new
+       @user= User.new
+       render :new
 
     end
 
@@ -10,11 +11,13 @@ class UserController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-
-            redirect_to root_path, notice: "Successfully created account"
+            
+            flash[:notice] = "Succesfully created account!"
+            redirect_to root_path
 
         else
 
+            flash[:notice] = "Something went wrong."
             render :new
 
         end
